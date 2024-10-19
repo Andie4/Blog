@@ -6,8 +6,6 @@ session_start();
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 $requete="SELECT * FROM billet";
 $stmt=$db->query($requete);
-
-
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 }
 
@@ -16,9 +14,8 @@ $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
    
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
