@@ -1,14 +1,17 @@
 <?php
 session_start();
 
-{ 
-
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
+
+// pour afficher les billets
 $requete="SELECT * FROM billet";
 $stmt=$db->query($requete);
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
-}
 
+// pour afficher l'auteur
+$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 4';
+$auteurStmt=$db->query($auteur);
+$utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -31,13 +34,17 @@ $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 	
 	<?php
 		foreach ($result as $billet){
+			
 			echo "<div class='container overflow-hidden text-center'>
 					<div class='row p-5'>
 						<div class='col-6'>
 								<h3 class='p-4'>{$billet["titre"]}</h3>
-								{$billet["texte"]}<br>
-								{$billet["date"]}
+								<p>{$billet["texte"]} </p>
+								<p>{$billet["date"]} </p>
+								<p>Autrie : {$utilisateur["prenom"]} </p>
+								
 						</div>
+
 						<div class='col-6'>
 							<img src='https://picsum.photos/536/354' >
 					</div>
