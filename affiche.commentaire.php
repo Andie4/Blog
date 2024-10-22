@@ -31,9 +31,11 @@ $auteurCommentaire = "SELECT prenom FROM utilisteur WHERE id_utilisateur = :id_u
 								<p>{$commentaire["texte"]} </p>
 								<p>{$commentaire["billet_id"]} </p>					
 						</div>
+						
 				</div>";
 		}
 ?>
 
 </body>
 </html>
+

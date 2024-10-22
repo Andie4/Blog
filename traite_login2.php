@@ -6,6 +6,8 @@ $requete="SELECT * FROM utilisateur WHERE login=:login";
 $stmt=$db->prepare($requete);
 $stmt->bindParam(':login',$_GET["login"], PDO::PARAM_STR);
 $stmt->execute();
+$hash=password_hash("mot_de_passe", PASSWORD_DEFAULT);
+
 
 
 if ($utilisateur=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -14,10 +16,17 @@ if ($utilisateur=$stmt->fetch(PDO::FETCH_ASSOC)){
 	$_SESSION["login"]=$utilisateur["login"];
 	echo "<a href=\"affiche_utilisateurs.php\">afficher les utilisateurs</a>";
 	} 
-	else {
-		echo "mot de passe incorrect";
+		if (password_verify('mot_de_passe', $hash)) {
+			echo "mot de passe valide
+			<a href=\"lien_post.php\">afficher les posts</a>";
+
+			
+
 		}
-	}
+		else {
+			echo "mot de passe incorrect";
+			}
+		}
 else {
 	echo "login incorrect";
 	}

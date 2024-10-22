@@ -3,19 +3,18 @@ session_start();
 
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 
-// pour afficher les billets
-$requete="SELECT * FROM billet";
-$stmt=$db->query($requete);
+//pour afficher les billets individuellment au clique voir le post 
+$requete="SELECT * FROM billet WHERE billet.id_nom = :id_nom";
+$stmt=$db->prepare($requete);
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
-// pour afficher l'auteur
-$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 4';
-$auteurStmt=$db->query($auteur);
-$utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
+// pour affivcher les commentaires
+$commentaire="SELECT * FROM commentaire WHERE commentaire.id_billet = :id_billet";
+$commentaireStmt=$db->prepare($commentaire);
+$commentaireResult=$commentaireStmt->fetchall(PDO::FETCH_ASSOC);
+
 ?>
 
-
-   
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,28 +27,33 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 <body>
 	<div class="container text-center ">
 		<div class="row"">
-			<h1 class="col p-8">Les derniers posts</h1>
+			<h1 class="col p-8"></h1>
 		</div>
 	</div>
 	
+	
+	
+	
 	<?php
+		// afficher les détails du post + les commentaires ( pas tous les posts les uns en dessous des autres)
 		foreach ($result as $billet){
-			
 			echo "<div class='container overflow-hidden text-center'>
 					<div class='row p-5'>
 						<div class='col-6'>
 								<h3 class='p-4'>{$billet["titre"]}</h3>
 								<p>{$billet["texte"]} </p>
-								<p>{$billet["date"]} </p>
-								<p>Autrie : {$utilisateur["prenom"]} </p>
-								
+								<p>{$billet["date_creation"]} </p>
+								<p>{$billet["id_utilisateur"]} </p>
 						</div>
-
-						<div class='col-6'>
-							<img src='https://picsum.photos/536/354' >
 					</div>
 				</div>";
 		}
+		
+
+		
 	?>
+
+<!-- lien page id=$post[id] -->
+
 </body>
 </html>

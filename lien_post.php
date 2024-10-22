@@ -31,6 +31,7 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
                     <li><a class="navbar-brand" href="lien_post.php">Accueil</a></li>
                     <li><a class="navbar-brand" href="saisie_login.php">Connexion</a></li>
                     <li><a class="navbar-brand" href="saisie_inscription.php">Inscription</a></li>
+					<li><a class="navbar-brand" href="profil.php">Profil</a></li>
                 </ul> 
             </div>
            
@@ -52,24 +53,25 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
         //     </ul>";
         
 
-
     echo "<div class='container overflow-hidden text-center'>
 					<div class='row p-5'>
 						<div class='col-6'>
 								<h3 class='p-4'>{$billet["titre"]}</h3>
 								<p>{$billet["texte"]} </p>
 								<p>{$billet["date"]} </p>
-								<p>Autrie : {$utilisateur["prenom"]} </p>
-								
+								<p>Autrice : {$utilisateur["prenom"]} </p>
+								<a href='affiche_post.php?id={$billet['id_nom']} '> Voir le post </a>
 						</div>
 
 						<div class='col-6'>
-							<img src='https://picsum.photos/536/354' >
-					</div>
+							<img class='img-fluid' src='./meduses.avif' >
+						</div>
+					
 				</div>";
     }
 
 ?>
+
 
 
 </body>
