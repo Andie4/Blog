@@ -35,19 +35,20 @@ $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
 
 
-    <?php
+    <!-- <?php
     echo 'Bonjour !';
-    ?>
+    ?> -->
    
 
-    <form method="post" action="post">
+    <!-- <form method="post" action="post">
         <input type="file" name="photo">
         <input type="submit" name="upload">
-    </form>
+    </form> -->
 
-    <?php
-         echo '<img  src="./pdp.webp" width="150" />';
-    ?>
+   <?php
+       //  echo '<img  src="./pdp.webp" width="150" 
+    />';
+   
     
 </body>
 </html>
