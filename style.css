@@ -1,0 +1,16 @@
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+/* couleurs */
+.contour {
+    border: 1px solid #120202;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+} 

@@ -4,7 +4,7 @@ session_start();
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 
 // pour afficher les billets
-$requete="SELECT * FROM billet ORDER BY date DESC LIMIT 3";
+$requete="SELECT * FROM billet";
 $stmt=$db->query($requete);
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
@@ -21,6 +21,7 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Les derniers posts</title>
+    <link rel="stylesheet" href="style.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -46,13 +47,15 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
         <p>Le blog d'Andie est un blog d'actualités sur les nouvelles technologies, les jeux vidéos et les séries TV.</p>
 
 	</div>
-    <h2 class="col p-8">Les derniers articles</h2>
+    <h2 class="col p-8">Tous les articles</h2>
 <?php
     foreach ($result as $billet){
-        
+        // echo "<ul>
+        //         <li><a href='affiche_post.php?'>{$billet["titre"]}</a></li>
+        //     </ul>";
         
 
-    echo "<div class='container overflow-hidden text-center'>
+    echo "<div class='container overflow-hidden text- .contour'>
 					<div class='row p-5'>
 						<div class='col-6'>
 								<h3 class='p-4'>{$billet["titre"]}</h3>
