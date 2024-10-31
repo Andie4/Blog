@@ -11,6 +11,23 @@ session_start();
 	<title>Document</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-body-teriary">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul>
+                    <li><a class="navbar-brand" href="lien_post.php">Accueil</a></li>
+                    <li><a class="navbar-brand" href="saisie_login.php">Connexion</a></li>
+                    <li><a class="navbar-brand" href="saisie_inscription.php">Inscription</a></li>
+					<li><a class="navbar-brand" href="profil.php">Profil</a></li>
+                </ul> 
+            </div>
+           
+        </div>
+        
+    </nav>
+ 
+
+
 	<div class='container text-center '>
 		<div class='row'>
 			<h1 class='col p-8'>Connexion</h1>
@@ -23,7 +40,7 @@ session_start();
 	}
 	?>
 	
-		<FORM action="traite_login2.php">
+		<FORM action="traite_login2.php" method="post"=>
 			
 			<p>Saisissez votre login :<INPUT type=text name="login"> 
 			<?php 
@@ -38,8 +55,6 @@ session_start();
 			<br><input type=submit value= "OK">
 		</FORM>
 
-	<?php
-	// echo password_hash("toto", PASSWORD_DEFAULT);
-	?>
+	
 </body>
 </html>

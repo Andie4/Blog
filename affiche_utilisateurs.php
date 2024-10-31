@@ -10,8 +10,12 @@ $stmt=$db->query($requete);
 
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 ?>
+
+
 <table border=1>
 <tr><th>Id</th><th>Prénom</th><th>Login</th><th>Mdp</th></tr>
+
+
 <?php
 foreach ($result as $utilisateurs){
 	echo "<tr><td>{$utilisateurs["id_utilisateur"]}</td><td>{$utilisateurs["prenom"]}</td><td>{$utilisateurs["login"]}</td><td>{$utilisateurs["mot_de_passe"]}</td></tr>";
