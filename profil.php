@@ -22,6 +22,9 @@ $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -48,17 +51,17 @@ if ($utilisateur) {
     <ul>
         <li>Login : {$utilisateur['login']}</li>
         <li>Prénom : {$utilisateur['prenom']}</li>
-        <li>Photo : <img src='photo/{$utilisateur['photo']}' alt='photo de profil'></li>
+        <li>Photo : <img class='img-fluid' src='photo/{$utilisateur['photo']}' alt='photo de profil'></li>
     </ul>";
 
-    // Formulaire d'upload de photo
-    echo "<form action='traite_login2.php' method='post' enctype='multipart/form-data'>
+    // ajout de photo
+    echo "<form action='profil.php' method='post' enctype='multipart/form-data'>
         <input type='file' name='photo' required>
         <input type='submit' name='upload' value='Changer la photo de profil'>
     </form>";
 }
 
-//modification de la pdp fait avec un tuto : https://www.youtube.com/watch?v=lDZLZAdr1is
+//modification de la pdp fait avec ce tuto : https://www.youtube.com/watch?v=lDZLZAdr1is
     if (isset($_FILES["photo"]) && !empty($_FILES['photo']['name'])) {
         $tailleMax = 2097152;
         $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
@@ -88,8 +91,6 @@ if ($utilisateur) {
         } else {
             echo "Votre photo ne doit pas dépasser 2Mo.";
         }
-    } else {
-        echo "Aucune photo sélectionnée.";
     }
 ?>
 <a href="deconect.php">Déconnexion</a>
