@@ -1,7 +1,8 @@
 <?php
 session_start();
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
-$requete="SELECT * FROM utilisateur WHERE login=:login";
+$requete="SELECT * FROM utilisateur WHERE login=:login, id_utilisateur=:id_utilisateur";
+
 
 $stmt=$db->prepare($requete);
 $stmt->bindParam(':login',$_POST["login"], PDO::PARAM_STR);

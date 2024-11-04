@@ -56,9 +56,6 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 
 	
 	
-	
-	
-	
 	<?php
 	// Afficher les détails du post
 	foreach ($result as $billet) {
@@ -93,8 +90,30 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 			</div>";
 	}
 
-	
+	// ajouter un commentaire 
+	if (isset($_SESSION["login"])) {
+		echo "<form action='traite_commentaire.php' method='post'>
+				<input type='text' name='billet_id' value='{$_GET['id']}'>
+				<input type='submit' value='Ajouter'>
+			</form>";
+	} else {
+		echo "<p>Connectez-vous pour ajouter un commentaire</p>";
+	}
+
+
+
+
+
+
+
+
+
+
 	?>
+
+
+
+
 
 <!-- lien page id=$post[id] -->
 <script>
