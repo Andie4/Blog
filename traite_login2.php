@@ -1,13 +1,16 @@
 <?php
 session_start();
 $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
-$requete="SELECT * FROM utilisateur WHERE login=:login, id_utilisateur=:id_utilisateur";
+session_start();
+$requete="SELECT * FROM utilisateur WHERE login=:login";
 
 
 $stmt=$db->prepare($requete);
 $stmt->bindParam(':login',$_POST["login"], PDO::PARAM_STR);
 $stmt->execute();
 $hash=password_hash("mot_de_passe", PASSWORD_DEFAULT);
+
+var_dump($_POST)
 ?>
 
 
@@ -40,6 +43,7 @@ if ($utilisateur = $stmt->fetch(PDO::FETCH_ASSOC)) {
     if (password_verify($_POST["mot_de_passe"], $utilisateur["mot_de_passe"])) {
         $_SESSION["login"] = $utilisateur["login"];
         header("Location: profil.php");
+        
         exit();
     } else {
         echo  "mot de passe incorrect";
