@@ -24,12 +24,18 @@ $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 <body>
 
 <h3>Ajouter un commentaire</h3>
-<form action="traite_commentaire" method="post">
-    <textarea name="" id="texte" cols="30" rows="10"></textarea>
-    <p placeholder="Écrivez votre texte" required></p>
-    <input type="submit" value="Ajouter">
-
-</form>
+<?php 
+if (isset($_SESSION["login"])){
+    echo"
+        <form action='traite_commentaire.php' method='post'>
+        <textarea name='texte' id='' cols='30' rows='10' placeholder='Écrivez votre texte'></textarea>
+        <input type='hidden' name='billet_id' value='$id_billet'>
+        <input type='submit' value='Ajouter'>
+        </form>";
+} else{
+    echo "connectez vous pour ajouter un commentaire";
+}
+?>
     
 </body>
 </html>

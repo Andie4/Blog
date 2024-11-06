@@ -1,35 +1,46 @@
 <?php
 session_start();
 // var_dump($_SESSION);
-if (isset($_SESSION["login"]))
+if (isset($_SESSION["login"])){
 
 { 
+if(!empty($_POST['texte']) && !empty($_POST['billet_id'])) {
+    try {
+        $db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 
-$db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
-$requete="SELECT * FROM utilisateur";
-$stmt=$db->query($requete);
+        // récupérer l'id de l'utilisateur logué
+        $requeteUtilisateur = "SELECT id_utilisateur FROM utilisateur WHERE login = :login";
+        $stmtUtilisateur = $db->prepare($requeteUtilisateur);
+        $stmtUtilisateur->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
+        $stmtUtilisateur->execute();
+        $utilisateur = $stmtUtilisateur->fetch(PDO::FETCH_ASSOC);
 
-$commentaire="SELECT * FROM commentaire WHERE utilisateur_id=:utilisateur_id";
-$stmtCommentaire=$db->prepare($commentaire);
-$stmtCommentaire->bindParam(':utilisateur_id',$_SESSION["utilisateur_id"], PDO::PARAM_STR);
-$stmtCommentaire->execute();
+        // je précise que utilisateur_id est la clé étrangère dans la table commentaire et la clé primaire sous le nom id_utilisateur dans la table utilisateur
+        if ($utilisateur){
+            $utilisateur_id = $utilisateur['id_utilisateur'];
+            $billet_id = $_POST['billet_id'];
+            $texte = $_POST['texte'];
+        }
 
-$resultCommentaire=$stmtCommentaire->fetchall(PDO::FETCH_ASSOC);
-}
+        // ajouter un commentaire 
+        $requeteCommentaire="INSERT INTO commentaire (texte, date, utilisateur_id, billet_id) VALUES (:texte, :date, :utilisateur_id, :billet_id)";
+        $stmtCommentaire=$db->prepare($requetCommentaire);
+        $stmtCommentaire->execute(['texte' => $texte, 'utilisateur_id' => $utilisateur_id, 'billet_id' => $billet_id]);
 
-// ajouter un commentaire 
-if( ){
-    $requete= "INSERT INTO commentaire (texte, date, utilisateur_id, billet_id) VALUES (:texte, :date, :utilisateur_id, :billet_id)";
-    $stmtBillet= $db->prepare($requete);
-    $stmtBillet->bindValue(':texte',$_POST["texte"] , PDO::PARAM_STR);
-    $stmtBillet->bindValue(':date',$_POST["date"] , PDO::PARAM_STR); 
-    $stmtBillet->bindValue(':utilisateur_id',$_POST["utilisateur_id"] , PDO::PARAM_STR); 
-    $stmtBillet->bindValue(':billet_id',$_POST["billet_id"] , PDO::PARAM_STR); 
-}
+        }
 
 // redirection et mise à jour de la page profil 
-header('Location: affiche_post.php');
+header("Location: affiche_post.php?id=".$billet_id);
 exit();
+    }else{
+        echo "Utilisateur non trouvé.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+} else {
+    echo "erreur avec des données";
+}
 
 
 

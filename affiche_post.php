@@ -13,9 +13,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 // pour afficher les commentaires
-$commentaire = "SELECT commentaire.date, commentaire.texte, utilisateur.login AS auteur FROM commentaire JOIN utilisateur ON commentaire.utilisateur_id = utilisateur.id_utilisateur WHERE commentaire.billet_id = :id_billet";
+$commentaire = "SELECT commentaire.date, commentaire.texte, utilisateur.login AS auteur FROM commentaire JOIN utilisateur ON commentaire.utilisateur_id = utilisateur.id_utilisateur WHERE commentaire.billet_id = :id";
 $stmtCommentaire = $db->prepare($commentaire);
-$stmtCommentaire->execute(['id_billet' => $_GET['id']]);
+$stmtCommentaire->execute(['id' => $_GET['id']]);
 $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -71,43 +71,50 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 				</div>
 			</div>";
 	}
-// problème pour m'afficher en auteur sur tout les posts
+// problème pour m'afficher en auteur sur tout les posts NE SURTOUT PAS OUBLIER DE CHERCHER LA SOLUTION
 
-	// Afficher les commentaires
-	foreach ($resultCommentaire as $commentaire) {
+	// création de la section commentaire(s)
+	if (!empty($resultCommentaire)) {
 		echo "<div class='container overflow-hidden text-center'>
 				<div class='row p-5'>
 					<div class='col-6'>
 						<h3 class='p-4'>Commentaires :</h3>
-						<button type='button' onclick='toggle_text(this);'>Afficher le commentaire</button>
-						<span class='commentaire' style='display:none;'>
-							<p>{$commentaire['date']}</p>
-							<p>{$commentaire['auteur']}</p>
-							<p>{$commentaire['texte']}</p>
-						</span>
-					</div>
-				</div>
-			</div>";
+						<button id='btnAfficheCommentaire' onclick='afficheCommentaire();'> Affficher les commentaires</button>
+						<div id='commentaire' style='display:none;'>";
+
+						// Afficher les DÉTAILS commentaires
+						foreach ($resultCommentaire as $commentaire) {
+							echo "<div class='container overflow-hidden text-center'>
+									<div class='row p-5'>
+										<div class='col-6'>
+											<span class='commentaire' style='display:none;'>
+												<p>{$commentaire['date']}</p>
+												<p>{$commentaire['auteur']}</p>
+												<p>{$commentaire['texte']}</p>
+											</span>
+										</div>
+									</div>
+								</div>
+						
+
+						</div>
+				</div>";
+			}
+			
+	} else {
+		echo"<p>pas de commentaire(s) pour ce billet</p> ";
 	}
 
 	// ajouter un commentaire 
-	if (isset($_SESSION["login"])) {
+	if (isset($_SESSION['login']) && isset($_GET['id'])) {
 		echo "<form action='traite_commentaire.php' method='post'>
-				<input type='text' name='billet_id' value='{$_GET['id']}'>
+				<textarea name='texte' id '' cols='30' rows='10' placeholder='Écrivez votre texte'></textarea>
+				<input type='hidden' name='billet_id' value='{$_GET['id']}'>
 				<input type='submit' value='Ajouter'>
 			</form>";
 	} else {
 		echo "<p>Connectez-vous pour ajouter un commentaire</p>";
 	}
-
-
-
-
-
-
-
-
-
 
 	?>
 
@@ -117,16 +124,17 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- lien page id=$post[id] -->
 <script>
-	function toggle_text(button) {
-		var span = button.nextElementSibling;
+	function afficheCommentaire() {
+		var sectionCommentaire = document.getElementById("commentaire");
+		var btn = document.getElementById("btnAfficheCommentaire");
 		
-		if (span.style.display === "none") {
-			span.style.display = "block"; 
-			button.textContent = "Cacher le commentaire";
+		if (sectionCommentaire.style.display === "none") {
+			sectionCommentaire.style.display = "block"; 
+			btn.textContent = "Cacher le commentaire";
 
 		} else {
-			span.style.display = "none"; 
-			button.textContent = "Afficher le commentaire"; 
+			sectionCommentaire.style.display = "none"; 
+			btn.textContent = "Afficher le commentaire"; 
 		}
 	}
 
