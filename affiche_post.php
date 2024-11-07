@@ -65,58 +65,51 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 						<h3 class='p-4'>{$billet['titre']}</h3>
 						<p>{$billet['texte']}</p>
 						<p>{$billet['date']}</p>
-						<p>Auteur : Andréa </p>
+						<p>Autrice : {$billet['auteur']}</p>
 						
 					</div>
 				</div>
 			</div>";
 	}
-// problème pour m'afficher en auteur sur tout les posts NE SURTOUT PAS OUBLIER DE CHERCHER LA SOLUTION
 
-	// création de la section commentaire(s)
-	if (!empty($resultCommentaire)) {
-		echo "<div class='container overflow-hidden text-center'>
-				<div class='row p-5'>
-					<div class='col-6'>
-						<h3 class='p-4'>Commentaires :</h3>
-						<button id='btnAfficheCommentaire' onclick='afficheCommentaire();'> Affficher les commentaires</button>
-						<div id='commentaire' style='display:none;'>";
+	// Création de la section commentaire(s)
+if (!empty($resultCommentaire)) {
+    echo "<div class='container overflow-hidden text-center'>
+            <div class='row p-5'>
+                <div class='col-6'>
+                    <h3 class='p-4'>Commentaires :</h3>
+                    <button id='toggle_comments_button' onclick='toggle_comments();'>Afficher les commentaires</button>
+                    
+                    <!-- Section des commentaires, initialement cachée -->
+                    <div id='comments_section' style='display: none;'>";
+                    
+                    foreach ($resultCommentaire as $commentaire) {
+                        echo "<div class='commentaire-item'>
+                                <p>Date : {$commentaire['date']}</p>
+                                <p>Auteur : {$commentaire['auteur']}</p>
+                                <p>{$commentaire['texte']}</p>
+                              </div>";
+                    }
 
-						// Afficher les DÉTAILS commentaires
-						foreach ($resultCommentaire as $commentaire) {
-							echo "<div class='container overflow-hidden text-center'>
-									<div class='row p-5'>
-										<div class='col-6'>
-											<span class='commentaire' style='display:none;'>
-												<p>{$commentaire['date']}</p>
-												<p>{$commentaire['auteur']}</p>
-												<p>{$commentaire['texte']}</p>
-											</span>
-										</div>
-									</div>
-								</div>
-						
+    echo "    </div>
+                </div>
+            </div>
+        </div>";
+} else {
+    echo "<p>Aucun commentaire pour ce billet.</p>";
+}
 
-						</div>
-				</div>";
-			}
-			
-	} else {
-		echo"<p>pas de commentaire(s) pour ce billet</p> ";
-	}
-
-	// ajouter un commentaire 
-	if (isset($_SESSION['login']) && isset($_GET['id'])) {
-		echo "<form action='traite_commentaire.php' method='post'>
-				<textarea name='texte' id '' cols='30' rows='10' placeholder='Écrivez votre texte'></textarea>
-				<input type='hidden' name='billet_id' value='{$_GET['id']}'>
-				<input type='submit' value='Ajouter'>
-			</form>";
-	} else {
-		echo "<p>Connectez-vous pour ajouter un commentaire</p>";
-	}
-
-	?>
+// Ajouter un commentaire 
+if (isset($_SESSION['login']) && isset($_GET['id'])) {
+    echo "<form action='traite_commentaire.php' method='post'>
+            <textarea name='texte' cols='30' rows='10' placeholder='Écrivez votre texte'></textarea>
+            <input type='hidden' name='billet_id' value='{$_GET['id']}'>
+            <input type='submit' value='Ajouter'>
+          </form>";
+} else {
+    echo "<p>Connectez-vous pour ajouter un commentaire</p>";
+}
+?>
 
 
 
@@ -124,19 +117,19 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- lien page id=$post[id] -->
 <script>
-	function afficheCommentaire() {
-		var sectionCommentaire = document.getElementById("commentaire");
-		var btn = document.getElementById("btnAfficheCommentaire");
-		
-		if (sectionCommentaire.style.display === "none") {
-			sectionCommentaire.style.display = "block"; 
-			btn.textContent = "Cacher le commentaire";
+    function toggle_comments() {
+        var commentsSection = document.getElementById('comments_section');
+        var button = document.getElementById('toggle_comments_button');
 
-		} else {
-			sectionCommentaire.style.display = "none"; 
-			btn.textContent = "Afficher le commentaire"; 
-		}
-	}
+        if (commentsSection.style.display === "none") {
+            commentsSection.style.display = "block";
+            button.textContent = "Cacher les commentaires";
+        } else {
+            commentsSection.style.display = "none";
+            button.textContent = "Afficher les commentaires";
+        }
+    }
+
 
 // inspiration pour l'affichage des commentaires : https://openclassrooms.com/forum/sujet/appuyer-sur-un-bouton-pour-afficher-du-texte-21481
 </script>

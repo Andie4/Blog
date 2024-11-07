@@ -42,6 +42,7 @@ var_dump($_POST)
 if ($utilisateur = $stmt->fetch(PDO::FETCH_ASSOC)) {
     if (password_verify($_POST["mot_de_passe"], $utilisateur["mot_de_passe"])) {
         $_SESSION["login"] = $utilisateur["login"];
+        $_SESSION["id_utilisateur"] = $utilisateur["id_utilisateur"];
         header("Location: profil.php");
         
         exit();
