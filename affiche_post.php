@@ -9,6 +9,11 @@ $stmt = $db->prepare($requete);
 $stmt->execute(['id_nom' => $_GET['id']]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// pour afficher l'auteur
+$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 4';
+$auteurStmt=$db->query($auteur);
+$utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
+
 // source de l'utilisation du JOIN : https://colibri.unistra.fr/fr/course/practice/notions-de-base-en-sql/regrouper-avec-group-by/57
 
 
@@ -49,7 +54,7 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 
 	<div class="container text-center ">
-		<div class="row"">
+		<div class="row">
 			<h1 class="col p-8"></h1>
 		</div>
 	</div>
@@ -65,7 +70,7 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 						<h3 class='p-4'>{$billet['titre']}</h3>
 						<p>{$billet['texte']}</p>
 						<p>{$billet['date']}</p>
-						<p>Autrice : {$billet['auteur']}</p>
+						<p>Autrice : {$utilisateur['prenom']}</p>
 						
 					</div>
 				</div>
@@ -85,10 +90,9 @@ if (!empty($resultCommentaire)) {
                     
                     foreach ($resultCommentaire as $commentaire) {
                         echo "<div class='commentaire-item'>
-                                <p>Date : {$commentaire['date']}</p>
-                                <p>Auteur : {$commentaire['auteur']}</p>
-                                <p>{$commentaire['texte']}</p>
-                              </div>";
+                                <p> <span style='font-weight: bold'> {$commentaire['auteur']} </span>  à écrit :  <span style='font-weight:bold '> {$commentaire['texte']} </span> <br> (le {$commentaire['date']})</p>
+                              </div>
+                              <hr>";
                     }
 
     echo "    </div>
@@ -109,6 +113,8 @@ if (isset($_SESSION['login']) && isset($_GET['id'])) {
 } else {
     echo "<p>Connectez-vous pour ajouter un commentaire</p>";
 }
+    
+
 ?>
 
 

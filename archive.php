@@ -41,7 +41,7 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
         
     </nav>
 	<div class="container text-center ">
-		<div class="row"">
+		<div class="row">
 			<h1 class="col p-8">Focus Actus </h1>
 		</div>   
         <p>Le blog d'Andie est un blog d'actualités sur les nouvelles technologies, les jeux vidéos et les séries TV.</p>

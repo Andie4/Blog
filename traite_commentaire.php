@@ -1,7 +1,7 @@
 <?php
 session_start();
 // var_dump($_SESSION);
-if (isset($_SESSION["login"])){
+if (!isset($_SESSION["login"])){
     // Redirection si l'utilisateur n'est pas connecté
     header("Location: saisie_login.php");
     exit();
@@ -28,6 +28,8 @@ if(!empty($_POST['texte']) && !empty($_POST['billet_id'])) {
         $requeteCommentaire="INSERT INTO commentaire (texte, date, utilisateur_id, billet_id) VALUES (:texte, :date, :utilisateur_id, :billet_id)";
         $stmtCommentaire=$db->prepare($requeteCommentaire);
         $stmtCommentaire->execute(['texte' => $texte, 'utilisateur_id' => $utilisateur_id, 'billet_id' => $billet_id]);
+
+        
 
 // redirection et mise à jour de la page profil 
 header("Location: affiche_post.php?id=" . $billet_id);

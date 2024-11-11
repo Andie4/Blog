@@ -34,13 +34,14 @@ session_start();
 		</div>
 	</div>
 
-	<?php	if (isset($_SESSION["login"]))
-	{ 
-	echo "Bonjour {$_SESSION["login"]}<BR>"; 
+	<?php	if (isset($_SESSION["login"])){ 
+		header('location: profil.php');
+		echo "Bonjour {$_SESSION["login"]}<BR>"; 
+		exit();
 	}
 	?>
 	
-		<FORM action="traite_login2.php" method="post"=>
+		<FORM action="traite_login2.php" method="post">
 			
 			<p>Saisissez votre login :<INPUT type=text name="login"> 
 			<?php 
