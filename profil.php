@@ -31,6 +31,7 @@ if (isset($_SESSION['login'])) {
 }
 
 // JE SOUHAITE SUPPRIMER CETTE PARTIE CAR JE L'AI AU DEBUT DE MON CODE MAIS SANS ÇA IL NE FONCTIONNE PAS
+$db = new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 $requete = "SELECT * FROM utilisateur WHERE login = :login";
 $stmt = $db->prepare($requete);
 $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
@@ -82,6 +83,10 @@ $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
     
 <?php
+if (!isset($_SESSION['login'])) {
+    echo"<p>Veuillez vous connecter pour avoir accès a cette page</p>";
+}
+
 if ($utilisateur) {
     echo "<h1>🔆 BONJOUR et bienvenue {$utilisateur['prenom']} 🔆</h1><br> 
     <ul>
@@ -128,6 +133,7 @@ if ($utilisateur) {
         } else {
             echo "Votre photo ne doit pas dépasser 2Mo.";
         }
+        echo "<a href='deconect.php>Déconnexion</a>";
 
     }
 
