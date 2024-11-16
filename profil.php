@@ -1,13 +1,36 @@
 <?php 
 session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: saisie_login.php"); // pour aller à la connexion si non connecté
-    exit();
+if (isset($_SESSION['login'])) {
+    try {
+        $db= new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
+        
+        // Récupérer l'ID de l'utilisateur
+        $requete = "SELECT id_utilisateur FROM utilisateur WHERE login = :login";
+        $stmt = $db->prepare($requete);
+        $stmt->bindParam(':login', $_SESSION['login'], PDO::PARAM_STR);
+        $stmt->execute();
+        $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+// test des 2 possibilits soit c'est le profil d'un utilisateur lambda soit c'est mon profil 
+
+        // reconnaisance de mon id en tant qu'admin
+        if ($utilisateur && $utilisateur['id_utilisateur'] == 18) {
+            $_SESSION['is_admin'] = true;
+            // redirection vers ma page dédié si mon id est reconnu
+            header('Location: profil_admin.php');
+            exit();
+
+        //utilisateur lambda
+        } else {
+            $_SESSION['is_admin'] = false;
+        }
+
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
 }
 
-
-$db=new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
-
+// JE SOUHAITE SUPPRIMER CETTE PARTIE CAR JE L'AI AU DEBUT DE MON CODE MAIS SANS ÇA IL NE FONCTIONNE PAS
 $requete = "SELECT * FROM utilisateur WHERE login = :login";
 $stmt = $db->prepare($requete);
 $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
@@ -28,20 +51,33 @@ $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-body-teriary">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse">
-                <ul>
-                    <li><a class="navbar-brand" href="lien_post.php">Accueil</a></li>
-                    <li><a class="navbar-brand" href="saisie_login.php">Connexion</a></li>
-                    <li><a class="navbar-brand" href="saisie_inscription.php">Inscription</a></li>
-					<li><a class="navbar-brand" href="profil.php">Profil</a></li>
-                </ul> 
-            </div>
-           
-        </div>
-        
-    </nav>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">🎮</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="lien_post.php">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="saisie_login.php">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="saisie_inscription.php">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="archive.php">Archive</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
     
@@ -59,6 +95,7 @@ if ($utilisateur) {
         <input type='file' name='photo' required>
         <input type='submit' name='upload' value='Changer la photo de profil'>
     </form>";
+            echo "<a href='deconect.php'>Déconnexion</a>";
 }
 
 //modification de la pdp fait avec ce tuto : https://www.youtube.com/watch?v=lDZLZAdr1is
@@ -91,9 +128,10 @@ if ($utilisateur) {
         } else {
             echo "Votre photo ne doit pas dépasser 2Mo.";
         }
+
     }
+
 ?>
-<a href="deconect.php">Déconnexion</a>
     
 </body>
 </html>
