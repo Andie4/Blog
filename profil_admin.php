@@ -52,51 +52,24 @@ $resultBillet=$stmtBillet->fetchall(PDO::FETCH_ASSOC);
   </div>
 </nav>
 
-    <h1 class="text-center">Espace admin</h1>
-    <h2 class="p-m-5 ">Utilisateurs</h2>
-<table border=1>
-    <tr>
-        <th>ID</th>
-        <th>Prénom</th>
-        <th>Login</th>
-        <th>Mot de passe</th>
-    </tr>
+<h1 class="text-center">Espace admin</h1>
+<h2 class="p-m-5 ">Utilisateurs</h2>
       <?php 
-      foreach ($result as $utilisateur){
-        echo "<tr>
-              <td> {$utilisateur['id_utilisateur']}</td>
-              <td> {$utilisateur['prenom']}</td>
-              <td> {$utilisateur['login']}</td>
-              <td> {$utilisateur['mot_de_passe']}</td>
-          </tr>";
-      }
-      ?>  
+      echo "<a href='gestion_utilisateur.php'>Modifier/supprimer</a>   <br>
+       <br> <br>";
+      ?>     
     
-</table>
-
-<h2>Billets :</h2>
-<table border=1>
-  
-    <?php foreach ($resultBillet as $billet){
-      echo "<tr>
-      <td> {$billet['id_nom']}</td>
-      <td> {$billet['titre']}</td>
-      <td> {$billet['texte']}</td>
-      <td> {$billet['date']}</td>
-      <td>
-          <a href='gestion_billet.php?id={$billet['id_nom']}'>Supprimer</a>
-      </td>
-      <td>
-          <a href='gestion_billet.php?id={$billet['id_nom']}'>Modifier</a>
-      </td>
-      </tr>";
-  }
-
-  echo "<a href='gestion_billet.php'>Ajouter/Modifier/supprimer</a>   <br>
+<h2>Billets :</h2>  
+<?php
+  echo "<a href='gestion_billet.php'>Ajouter/Modifier/supprimer</a>   <br> <br> <br>
   ";
   ?>
-        
-</table>
+
+<h2 class="p-m-5 ">Commentaires</h2>
+      <?php 
+      echo "<a href='gestion_commentaire.php'>Modifier/supprimer</a>   <br>
+       <br> <br>";
+      ?>         
 <br>
 <br>
 <a href="deconect.php">Se déconnecter</a>

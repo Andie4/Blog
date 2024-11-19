@@ -9,7 +9,7 @@ $stmt=$db->query($requete);
 $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
 // pour afficher l'auteur
-$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 4';
+$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 18';
 $auteurStmt=$db->query($auteur);
 $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 ?>

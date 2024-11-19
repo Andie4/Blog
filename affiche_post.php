@@ -10,7 +10,7 @@ $stmt->execute(['id_nom' => $_GET['id']]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // pour afficher l'auteur
-$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 4';
+$auteur='SELECT prenom FROM utilisateur WHERE id_utilisateur = 18';
 $auteurStmt=$db->query($auteur);
 $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 
@@ -75,19 +75,23 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 	
 	<?php
 	// Afficher les détails du post
-	foreach ($result as $billet) {
-		echo "<div class='container overflow-hidden text-center .contour'>
-				<div class='row p-5'>
-					<div class='col-6'>
-						<h3 class='p-4'>{$billet['titre']}</h3>
-						<p>{$billet['texte']}</p>
-						<p>{$billet['date']}</p>
-						<p>Autrice : {$utilisateur['prenom']}</p>
-						
-					</div>
-				</div>
-			</div>";
-	}
+	if (empty($result)) {
+    echo "Aucun billet trouvé avec cet ID.";
+} else {
+    foreach ($result as $billet) {
+        echo "<div class='container overflow-hidden text-center .contour'>
+                  <div class='row p-5'>
+                      <div class='col-6'>
+                          <h3 class='p-4'>{$billet['titre']}</h3>
+                          <p>{$billet['texte']}</p>
+                          <p>{$billet['date']}</p>
+                          <p>Autrice : {$utilisateur['prenom']}</p>
+                      </div>
+                  </div>
+              </div>";
+    }
+}
+
 
 	// Création de la section commentaire(s)
 if (!empty($resultCommentaire)) {

@@ -113,7 +113,7 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
 </nav>
 
 <div class="container mt-5">
-    <h1 class="text-center">Gestion des Billets</h1>
+    <h1 class="text-center">Gestion des billets</h1>
 
     <!-- Ajouter un billet -->
     <h2>Ajouter un nouveau billet</h2>
@@ -145,7 +145,6 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
         <?php 
         foreach ($billets as $billet) {
             echo "
@@ -192,7 +191,6 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
             </div>";
         }
         ?>
-        </tbody>
     </table>
 </div>
 

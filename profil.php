@@ -84,7 +84,8 @@ $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
     
 <?php
 if (!isset($_SESSION['login'])) {
-    echo"<p>Veuillez vous connecter pour avoir accès a cette page</p>";
+    echo"<p>Veuillez vous connecter pour avoir accès a cette page</p>
+     <a href='saisie_login.php'>Connexion</a>";
 }
 
 if ($utilisateur) {
