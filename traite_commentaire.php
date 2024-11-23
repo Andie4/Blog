@@ -23,11 +23,12 @@ if(!empty($_POST['texte']) && !empty($_POST['billet_id'])) {
             $utilisateur_id = $utilisateur['id_utilisateur'];
             $billet_id = $_POST['billet_id'];
             $texte = $_POST['texte'];
+            $date = date('Y-m-d H:i:s');
             
         // ajouter un commentaire 
         $requeteCommentaire="INSERT INTO commentaire (texte, date, utilisateur_id, billet_id) VALUES (:texte, :date, :utilisateur_id, :billet_id)";
         $stmtCommentaire=$db->prepare($requeteCommentaire);
-        $stmtCommentaire->execute(['texte' => $texte, 'utilisateur_id' => $utilisateur_id, 'billet_id' => $billet_id]);
+        $stmtCommentaire->execute(['texte' => $texte, 'utilisateur_id' => $utilisateur_id, 'billet_id' => $billet_id, 'date' => $date]);
 
         
 

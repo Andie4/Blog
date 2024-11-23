@@ -29,11 +29,10 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
     $id_utilisateur = $_POST['id_utilisateur'];
     $prenom = $_POST['prenom'];
     $login = $_POST['login'];
-    $photo = $_POST['photo'];
     
     try {
-        $stmt = $db->prepare("UPDATE utilisateur SET prenom = :prenom, login = :login, photo = :photo WHERE id_utilisateur = :id");
-        $stmt->execute([':prenom' => $prenom, ':login' => $login, photo => $photo, ':id' => $id_utilisateur]);
+        $stmt = $db->prepare("UPDATE utilisateur SET prenom = :prenom, login = :login WHERE id_utilisateur = :id");
+        $stmt->execute([':prenom' => $prenom, ':login' => $login, ':id' => $id_utilisateur]);
         header("Location: gestion_utilisateur.php");
         exit();
     } catch (PDOException $e) {
@@ -43,7 +42,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'modifier') {
 
 // ---------------------------------- AFFICHAGE DES UTILISATEURS ----------------------------------
 try {
-    $sql = "SELECT id_utilisateur, prenom, login, photo FROM utilisateur";
+    $sql = "SELECT id_utilisateur, prenom, login FROM utilisateur";
     $stmt = $db->query($sql);
     $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -101,7 +100,6 @@ try {
                 <th>ID</th>
                 <th>Prénom</th>
                 <th>Login</th>
-                <th>Photo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -112,7 +110,6 @@ foreach ($utilisateurs as $utilisateur) {
         <td>{$utilisateur['id_utilisateur']}</td>
         <td>{$utilisateur['prenom']}</td>
         <td>{$utilisateur['login']}</td>
-        <td><img class='imgProfil' src='photo/{$utilisateur['photo']}' alt='photo de profil'></td>
         <td>
             <!-- Bouton Modifier -->
             <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modifierModal{$utilisateur['id_utilisateur']}'>Modifier</button>
@@ -142,10 +139,6 @@ foreach ($utilisateurs as $utilisateur) {
                             <label for='login' class='form-label'>Login</label>
                             <input type='text' name='login' class='form-control' value='{$utilisateur['login']}' required>
                         </div>
-                        <div class='mb-3'>
-                            <label for='photo' class='form-label'>Photo</label>
-                            <input type='file' name='photo' class='form-control' value='changer la photo de profil' required>
-                        </div>
                         <button type='submit' class='btn btn-primary'>Valider</button>
                     </form>
                 </div>
@@ -154,42 +147,6 @@ foreach ($utilisateurs as $utilisateur) {
     </div>";
 }
 
-//
-
-//modification de la pdp fait avec ce tuto : https://www.youtube.com/watch?v=lDZLZAdr1is
-    if (isset($_FILES["photo"]) ) {
-        $tailleMax = 2097152;
-        $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
-    
-        if ($_FILES['photo']['size'] <= $tailleMax) {
-            $extensionUpload = strtolower(substr(strrchr($_FILES['photo']['name'], '.'), 1));
-            if (in_array($extensionUpload, $extensionsValides)) {
-                $chemin = "photo/" . $_SESSION['login'] . "." . $extensionUpload;
-                $resultat = move_uploaded_file($_FILES['photo']['tmp_name'], $chemin);
-    
-                if ($resultat) {
-                    $updatephoto = $db->prepare('UPDATE utilisateur SET photo = :photo WHERE login = :login');
-                    $updatephoto->execute(array(
-                        'photo' => $_SESSION['login'] . "." . $extensionUpload,
-                        'login' => $_SESSION['login']
-                    ));
-                    
-                    // redirection et mise à jour de la page profil 
-                    header('Location: profil.php');
-                    exit();
-                } else {
-                    echo "Erreur durant l'importation de la photo.";
-                }
-            } else {
-                echo "Votre photo doit être au format jpg, jpeg, gif ou png.";
-            }
-        } else {
-            echo "Votre photo ne doit pas dépasser 2Mo.";
-        }
-        echo "<a href='deconect.php>Déconnexion</a>";
-
-    }
-    echo 'erreur';
 ?>
 
     </table>
@@ -199,3 +156,4 @@ foreach ($utilisateurs as $utilisateur) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!-- J'ai essayé d'ajouter la fonction modifier la photo de profil mais ça ne fonctionnais pas pour certaine images sans savoir pourquoi . J'ai doc mis cette fonctionnalité de coté . -->
