@@ -21,11 +21,13 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Les derniers posts</title>
-    <link rel="stylesheet" href="style.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kdam+Thmor+Pro&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">🎮</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,14 +55,16 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </div>
 </nav>
+<!-- image de fond accueil -->
+<img src="photo/accueil.jpg" alt="" class="imgfond">
+
 	<div class="container text-center ">
 		<div class="row">
-			<h1 class="col p-8">Focus Actus </h1>
+			<h1 class="col p-8 bruno-ace-regular titre">Focus Actus </h1>
 		</div>   
-        <p>Le blog d'Andie est un blog d'actualités sur les nouvelles technologies, les jeux vidéos et les séries TV.</p>
-
 	</div>
-    <h2 class="col p-8">Tous les articles</h2>
+    <h2 class="col p-8 sous-titre">Retrouvez ici la totalité de mes articles :</h2>
+
 <?php
     foreach ($result as $billet){
         // echo "<ul>
@@ -68,22 +72,45 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
         //     </ul>";
         
 
-    echo "<div class='container overflow-hidden text- .contour'>
-					<div class='row p-5'>
-						<div class='col-6'>
-								<h3 class='p-4'>{$billet["titre"]}</h3>
+    echo "<hr><div class='container overflow-hidden text- .contour'>
+					<div class='row center p-5'>
+          <div class='col-2'></div>
+						<div class='col-5'>
+								<h3 class='p-4 bruno-ace-regular'>{$billet["titre"]}</h3>
 								<p>{$billet["texte"]} </p>
 								<p>{$billet["date"]} </p>
 								<p>Autrice : {$utilisateur["prenom"]} </p>
-								<a href='affiche_post.php?id={$billet['id_nom']} '> Voir le post </a>
+								<a href='affiche_post.php?id={$billet['id_nom']}' class='btn'> Voir le post </a>
 						</div>
 
-						<div class='col-6'>
-							<img class='img-fluid' src='./meduses.avif' >
+						<div class='col-5'>
+              <img src='photo/{$billet['photo']}' class='imgb'>
 						</div>
 					
 				</div>";
+    echo"
+    <div class='card mb-3' style='max-width: 540px;'>
+    <div class='row g-0'>
+      <div class='col-md-4'>
+        <img src='photo/{$billet['photo']}' class='img-fluid rounded-start' =>
+      </div>
+      <div class='col-md-8'>
+        <div class='card-body'>
+          <h5 class='card-title'>{$billet["titre"]}</h5>
+          <p class='card-text'>{$billet["texte"]}</p>
+          <p>{$billet["date"]} </p>
+								<p>Autrice : {$utilisateur["prenom"]} </p>
+								<a href='affiche_post.php?id={$billet['id_nom']}' class='btn'> Voir le post </a>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    ";
+
     }
+
+    
 
 ?>
 

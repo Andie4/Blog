@@ -112,9 +112,9 @@ foreach ($utilisateurs as $utilisateur) {
         <td>{$utilisateur['login']}</td>
         <td>
             <!-- Bouton Modifier -->
-            <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modifierModal{$utilisateur['id_utilisateur']}'>Modifier</button>
+            <button class='btn btn-warning btnModifier' data-bs-toggle='modal' data-bs-target='#modifierModal{$utilisateur['id_utilisateur']}'>Modifier</button>
             <!-- Lien Supprimer -->
-            <a href='?action=supprimer&id={$utilisateur['id_utilisateur']}' class='btn btn-danger'>Supprimer</a>
+            <a href='?action=supprimer&id={$utilisateur['id_utilisateur']}' class='btn btn-danger btnSupprimer'>Supprimer</a>
         </td>
     </tr>";
 

@@ -1,12 +1,20 @@
 body {
-    color: #333;
-    font-family: Arial, sans-serif;
+    color: #ffffff;
     font-size: 16px;
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: black;
 }
+
+/* Police  */
+.bruno-ace-regular {
+    font-family: "Bruno Ace",sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
 /* couleurs */
 .contour {
     border: 1px solid #120202;
@@ -19,7 +27,108 @@ body {
     height: 20vh;
 }
 
-.img-fluid{
+.imgb{
+    width: 30vh;
+    height: 45vh;
+}
+
+.imgBaniere{
     width: 20vh;
     height: 20vh;
+}
+
+p{
+    color: white;
+}
+
+nav{
+    background-color: rgb(178, 0, 0);
+}
+
+.navbar a{
+    font-weight: bolder;
+}
+
+
+.btn{
+    background-color: rgb(178, 0, 0);
+    color: white;
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(178, 0, 0);
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.titre{
+    margin-top: 10vh;
+    margin-bottom: 3vh;
+}
+
+.sous-titre{
+    margin-left: 15vh;
+    margin-bottom: 3vh;
+}
+
+.imgfond{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    position: fixed;
+    z-index: -1;
+}
+
+.testimg{
+    width: 30px;
+    height: 20px;
+}
+
+.card{
+    background-color: rgb(0, 0, 0);
+    border: white;
+}
+
+h5 .card-title{
+    color: white;
+}
+
+.btnModifier{
+    background-color: rgb(103, 70, 112);
+    margin-left: 0;
+}
+.btnModifier:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(103, 70, 112);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 0;
+
+}
+
+.btnSupprimer{
+    background-color: rgb(178, 0, 0);
+    margin-left: 0;
+
+}
+
+.btnSupprimer:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(178, 0, 0);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 0;
+
 }
