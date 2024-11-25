@@ -22,7 +22,7 @@ $stmt->execute();
 }   // Vérification de l'ajout de l'utilisateur à la  base de données
     if ($stmt->execute()) {
     echo "Utilisateur ajouté avec succès. <br>
-    <a href=\"lien_post.php\">Voir les posts</a>"; 
+    <a href=\"index.php\">Voir les posts</a>"; 
 }   else {
     echo "Erreur lors de l'ajout de l'utilisateur.";
 }

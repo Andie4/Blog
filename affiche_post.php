@@ -4,7 +4,7 @@ session_start();
 $db = new PDO('mysql:host=localhost;dbname=Blog;port=8889;charset=utf8', 'root', 'root');
 
 // pour afficher les billets individuellment
-$requete = "SELECT billet.titre, billet.date, billet.texte, utilisateur.login AS auteur FROM billet JOIN utilisateur ON billet.id_nom = utilisateur.id_utilisateur WHERE billet.id_nom = :id_nom";
+$requete = "SELECT billet.titre, billet.date, billet.texte, billet.photo, utilisateur.login AS auteur FROM billet JOIN utilisateur ON billet.id_nom = utilisateur.id_utilisateur WHERE billet.id_nom = :id_nom";
 $stmt = $db->prepare($requete);
 $stmt->execute(['id_nom' => $_GET['id']]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,16 +37,16 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">🎮</a>
+    <p class="">🎮</p>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="lien_post.php">Accueil</a>
+          <a class="nav-link" aria-current="page" href="index.php">Accueil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="saisie_login.php">Connexion</a>
@@ -57,6 +57,7 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
         <li class="nav-item">
           <a class="nav-link" href="archive.php">Archive</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
         </li>
@@ -79,14 +80,17 @@ $resultCommentaire = $stmtCommentaire->fetchAll(PDO::FETCH_ASSOC);
     echo "Aucun billet trouvé avec cet ID.";
 } else {
     foreach ($result as $billet) {
-        echo "<div class='container overflow-hidden text-center .contour'>
+        echo "<div class='container overflow-hidden  .contour'>
                   <div class='row p-5'>
                       <div class='col-6'>
-                          <h3 class='p-4'>{$billet['titre']}</h3>
+                          <h3 class='p-4 bruno-ace-regular'>{$billet['titre']}</h3>
                           <p>{$billet['texte']}</p>
                           <p>{$billet['date']}</p>
                           <p>Autrice : {$utilisateur['prenom']}</p>
                       </div>
+                      <div class='col-6'>
+                        <img src='photo/{$billet['photo']}' class='imgb'>
+						          </div>
                   </div>
               </div>";
     }
@@ -121,8 +125,8 @@ if (!empty($resultCommentaire)) {
 
 // Ajouter un commentaire 
 if (isset($_SESSION['login']) && isset($_GET['id'])) {
-    echo "<form action='traite_commentaire.php' method='post'>
-            <textarea name='texte' cols='30' rows='10' placeholder='Écrivez votre texte'></textarea>
+    echo "<form action='traite_commentaire.php' method='post' id='formulaire'>
+            <textarea name='texte' cols='30' rows='10' placeholder='Écrivez votre texte' onKeyPress='if(event.keyCode == 13) validerForm();'></textarea>
             <input type='hidden' name='billet_id' value='{$_GET['id']}'>
             <input type='submit' value='Ajouter'>
           </form>";
@@ -138,23 +142,7 @@ if (isset($_SESSION['login']) && isset($_GET['id'])) {
 
 
 <!-- lien page id=$post[id] -->
-<script>
-    function toggle_comments() {
-        var commentsSection = document.getElementById('comments_section');
-        var button = document.getElementById('toggle_comments_button');
-
-        if (commentsSection.style.display === "none") {
-            commentsSection.style.display = "block";
-            button.textContent = "Cacher les commentaires";
-        } else {
-            commentsSection.style.display = "none";
-            button.textContent = "Afficher les commentaires";
-        }
-    }
-
-
-// inspiration pour l'affichage des commentaires : https://openclassrooms.com/forum/sujet/appuyer-sur-un-bouton-pour-afficher-du-texte-21481
-</script>
+<script src='script.js'></script>
 
 
 
