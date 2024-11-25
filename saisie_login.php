@@ -94,7 +94,10 @@ session_start();
   </div>
 </form>
 
-
+<?php
+// affichage du footer
+include("footer.php");
+?>
 
 </body>
 </html>

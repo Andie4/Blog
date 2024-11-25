@@ -139,7 +139,10 @@ if (isset($_SESSION['login']) && isset($_GET['id'])) {
 
 
 
-
+<?php
+// affichage du footer
+include("footer.php");
+?>
 
 <!-- lien page id=$post[id] -->
 <script src='script.js'></script>

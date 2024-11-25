@@ -140,6 +140,11 @@ if ($utilisateur) {
 
 ?>
     
+    <?php
+// affichage du footer
+include("footer.php");
+?>
+    
 </body>
 </html>
 

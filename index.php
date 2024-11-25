@@ -94,9 +94,10 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 
-<footer>
-  
-</footer>
+<?php
+// affichage du footer
+include("footer.php");
+?>
 
 
 </body>

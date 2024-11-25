@@ -162,3 +162,23 @@ h5 .card-title{
 .post{
     margin-bottom: 15vh;
 }
+
+
+
+
+
+
+
+
+/* -------------------FOOTER ---------------------- */
+
+.designFooter{ 
+    background-color: #a52a2a;
+    padding: 3vh;
+    margin-top: 5vh;
+    
+}
+
+footer a :hover{
+    color: rgb(0, 0, 0);
+}
