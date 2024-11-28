@@ -52,6 +52,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'ajouter') {
     try {
         $titre = $_POST['titre'];
         $texte = $_POST['texte'];
+        $photo = $_POST['photo'];
+
 
         // limite du texte
         if (strlen($texte) > 255) {
@@ -60,8 +62,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'ajouter') {
         }
 
         // AJOUT du billet dans la BDD
-        $requete = $db->prepare("INSERT INTO billet (titre, texte, date, auteur) VALUES (:titre, :texte, NOW(), :auteur)");
-        $requete->execute([':titre' => $titre, ':texte' => $texte, ':auteur' => 4  
+        $requete = $db->prepare("INSERT INTO billet (titre, texte, photo, date, auteur) VALUES (:titre, :texte, :photo, NOW(), :auteur)");
+        $requete->execute([':titre' => $titre, ':texte' => $texte, ':photo' => $photo, ':auteur' => 4  
         ]);
 
         header("Location: gestion_billet.php");
@@ -82,6 +84,7 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Billets</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg ">
@@ -128,6 +131,10 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
             <label for="texte" class="form-label">Contenu</label>
             <textarea name="texte" id="texte" class="form-control" rows="5" maxlength="255" required></textarea>
         </div>
+        <div class="mb-3">
+            <label class="form-label">Photo (format portrait uniquement)</label>
+            <input type="file" name="photo" id="photo" class="form-control">
+        </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 
@@ -142,6 +149,7 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
                 <th>Titre</th>
                 <th>Texte</th>
                 <th>Date</th>
+                <th>Photo</th>
                 <th>Auteur</th>
                 <th>Actions</th>
             </tr>
@@ -154,12 +162,13 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
                 <td>{$billet['titre']}</td>
                 <td>{$billet['texte']}</td>
                 <td>{$billet['date']}</td>
+                <td>{$billet['photo']}</td>
                 <td>{$billet['auteur']}</td>
                 <td>
                     <!-- Lien de modification -->
-                    <a href='#' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modifierModal{$billet['id_nom']}'>Modifier</a>
+                    <a href='#' class='btnActionModifier' data-bs-toggle='modal' data-bs-target='#modifierModal{$billet['id_nom']}'>Modifier</a>
                     <!-- Lien de suppression -->
-                    <a href='gestion_billet.php?action=supprimer&id={$billet['id_nom']}' class='btn btn-danger'>Supprimer</a>
+                    <a href='gestion_billet.php?action=supprimer&id={$billet['id_nom']}' class='btnActionSupprimer'>Supprimer</a>
                 </td>
             </tr>";
 

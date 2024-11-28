@@ -57,42 +57,31 @@ session_start();
 		exit();
 	}
 	?>
-<!-- 	
-		<FORM action="traite_login2.php" method="post">
-			
-			<p>Saisissez votre login :<INPUT type=text name="login"> 
+	
+		<form action="traite_login2.php" method="post" class="formConnexion mx-auto col-5">
+
+      <div class='titreFormConnexion text-center'>
+        <h1 class='col bruno-ace-regular'>Connexion</h1>
+      </div>
+			<div class=" mb-3 mt-300 col-6 mx-auto mt-200">
+        <label class="form-label d-grid">Login :<INPUT type=text name="login" class="form-control col-8"></label><br>
 			<?php 
 		if (isset($_GET["err"]) && $_GET["err"]=="login") { echo "ATTENTION MAUVAIS LOGIN";}
 			?>
-			<BR>
+			
 
-			<p>et votre passwd :<input type="password" name="mot_de_passe">
+			<label class="form-label d-grid">Mot de passe :<input type="password" name="mot_de_passe" class="form-control"></label>
 				<?php 
 		if (isset($_GET["err"]) && $_GET["err"]=="mdp") { echo "ATTENTION MAUVAIS MOT DE PASSE";}
 			?>
-			<br><input type=submit value= "OK">
-		</FORM> -->
+      </div>
+			
 
-	
-<form class="formConnexion mx-auto col-5">
-
-<div class='titreFormConnexion text-center'>
-			<h1 class='col bruno-ace-regular'>Connexion</h1>
-	</div>
-
-
-  <div class="mb-3 mt-300 col-6 mx-auto mt-200">
-    <label for="exemplelogin" class="form-label">Login</label>
-    <input type="login" class="form-control" id="exemplelogin" aria-describedby="login">
-  </div>
-  <div class="mb-3 col-6 mx-auto mt-80">
-    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 col-6 mx-auto d-grid mt-80">
+<div class="mb-3 col-6 mx-auto d-grid mt-200">
   	<button type="submit" class="btn btn-primary">Connexion</button>
   </div>
 </form>
+
 
 <?php
 // affichage du footer

@@ -51,7 +51,7 @@ nav{
     color: #ffffff;
 }
 
-
+/* ---------------------Boutons--------------------- */
 .btn{
     background-color: rgb(178, 0, 0);
     color: white;
@@ -72,6 +72,47 @@ nav{
     text-decoration: none;
     font-weight: bold;
 }
+
+.btnActionModifier{
+    background-color: rgb(0, 148, 178);
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.btnActionModifier:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btnActionSupprimer{
+    background-color: rgb(178, 0, 0);
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(223, 223, 223);
+}
+
+.btnActionSupprimer:hover{ 
+    background-color: rgb(255, 255, 255);
+    color: rgb(178, 0, 0);
+    border-radius: 5px;
+    margin-left: 50%;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 
 .titre{
     margin-top: 10vh;
