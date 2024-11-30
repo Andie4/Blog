@@ -89,9 +89,9 @@ foreach ($commentaires as $commentaire) {
         <td>{$commentaire['billet_titre']}</td>
         <td>
             <!-- Bouton Modifier -->
-            <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modifierModal{$commentaire['id_commentaire']}'>Modifier</button>
+            <button class='btn btn-warning btnModifier' data-bs-toggle='modal' data-bs-target='#modifierModal{$commentaire['id_commentaire']}'>Modifier</button>
             <!-- Lien Supprimer -->
-            <a href='?action=supprimer&id={$commentaire['id_commentaire']}' class='btn btn-danger'>Supprimer</a>
+            <a href='?action=supprimer&id={$commentaire['id_commentaire']}' class='btn btn-danger btnSupprimer'>Supprimer</a>
         </td>
     </tr>";
 

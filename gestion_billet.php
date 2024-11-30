@@ -87,7 +87,7 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
 <?php include("nav.php"); ?>
 
 
@@ -141,9 +141,9 @@ $billets = $db->query("SELECT * FROM billet")->fetchAll(PDO::FETCH_ASSOC);
                 <td>{$billet['auteur']}</td>
                 <td>
                     <!-- Lien de modification -->
-                    <a href='#' class='btnActionModifier' data-bs-toggle='modal' data-bs-target='#modifierModal{$billet['id_nom']}'>Modifier</a>
+                    <a href='#' class='btn btn-warning btnModifier' data-bs-toggle='modal' data-bs-target='#modifierModal{$billet['id_nom']}'>Modifier</a>
                     <!-- Lien de suppression -->
-                    <a href='gestion_billet.php?action=supprimer&id={$billet['id_nom']}' class='btnActionSupprimer'>Supprimer</a>
+                    <a href='gestion_billet.php?action=supprimer&id={$billet['id_nom']}' class='btn btn-danger btnSupprimer'>Supprimer</a>
                 </td>
             </tr>";
 

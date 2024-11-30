@@ -42,9 +42,7 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 
 <?php
     foreach ($result as $billet){
-        // echo "<ul>
-        //         <li><a href='affiche_post.php?'>{$billet["titre"]}</a></li>
-        //     </ul>";
+        
         
 
     echo "<div class='container overflow-hidden text- .contour'>
@@ -62,10 +60,9 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
               <img src='photo/{$billet['photo']}' class='imgb'>
 						</div>
 					
-				</div>";
+				</div>
+      </div>";
     }
-
-    
 
 ?>
 
