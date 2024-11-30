@@ -76,7 +76,6 @@ nav{
 .btnActionModifier{
     background-color: rgb(0, 148, 178);
     border-radius: 5px;
-    margin-left: 50%;
     padding: 5px;
     text-decoration: none;
     font-weight: bold;
@@ -87,7 +86,6 @@ nav{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border-radius: 5px;
-    margin-left: 50%;
     padding: 5px;
     text-decoration: none;
     font-weight: bold;
@@ -96,7 +94,6 @@ nav{
 .btnActionSupprimer{
     background-color: rgb(178, 0, 0);
     border-radius: 5px;
-    margin-left: 50%;
     padding: 5px;
     text-decoration: none;
     font-weight: bold;
@@ -107,11 +104,34 @@ nav{
     background-color: rgb(255, 255, 255);
     color: rgb(178, 0, 0);
     border-radius: 5px;
-    margin-left: 50%;
     padding: 5px;
     text-decoration: none;
     font-weight: bold;
 }
+
+
+.btnAfficherCommentaires{
+    background-color: rgb(178, 0, 0);
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+
+}
+
+.btnAfficherCommentaires :hover{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+
+
 
 
 .titre{
@@ -204,17 +224,22 @@ h5 .card-title{
     margin-bottom: 15vh;
 }
 
+.detailsPost{
+    display: block;
+    justify-content: center;
+}
 
 
-
-
+.whiteText{
+    color: white;
+}
 
 
 
 /* -------------------FOOTER ---------------------- */
 
 .designFooter{ 
-    background-color: #a52a2a;
+    background-color: rgb(178, 0, 0);
     padding: 3vh;
     margin-top: 5vh;
     

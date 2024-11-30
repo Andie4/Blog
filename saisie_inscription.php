@@ -16,33 +16,8 @@ session_start();
 <!-- image de fond accueil -->
 <img src="./photo/spider-man2.jpeg" alt="" class="imgfond">
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">🎮</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="archive.php">Archive</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_login.php">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_inscription.php">Inscription</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php include("nav.php"); ?>
+
 
 <!-- formulaire inscription -->
 <form action="traite_inscription.php" class="formConnexion mx-auto col-5">
@@ -62,7 +37,7 @@ session_start();
   </div>
   <div class="mb-3 col-6 mx-auto mt-80">
     <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type=mdp name="mot_de_passe" class="form-control">
+    <input type=password name="mot_de_passe" class="form-control">
   </div>
   <div class="mb-3 col-6 mx-auto d-grid mt-80">
   <input type=submit value= "Valider" class="btn btn-primary">

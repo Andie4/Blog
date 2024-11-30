@@ -52,56 +52,40 @@ $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">🎮</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_login.php">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_inscription.php">Inscription</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="archive.php">Archive</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php include("nav.php"); ?>
+
+<div class="container mt-50">
+  <div class="mb-3 mt-30"></div>
+</div>
 
 
-    
+<div class="container mt-5">   
 <?php
 if (!isset($_SESSION['login'])) {
-    echo"<p>Veuillez vous connecter pour avoir accès a cette page</p>
+    echo"<p class='mb-70 mt-90 text-center''>Veuillez vous connecter pour avoir accès a cette page</p>
      <a href='saisie_login.php'>Connexion</a>";
 }
 
 if ($utilisateur) {
-    echo "<h1>🔆 BONJOUR et bienvenue {$utilisateur['prenom']} 🔆</h1><br> 
-    <ul>
-        <li>Login : {$utilisateur['login']}</li>
-        <li>Prénom : {$utilisateur['prenom']}</li>
-        <li>Photo : <img class='img-fluid' src='photo/{$utilisateur['photo']}' alt='photo de profil'></li>
-    </ul>";
-
-    // ajout de photo
-    echo "<form action='profil.php' method='post' enctype='multipart/form-data'>
-        <input type='file' name='photo' required>
-        <input type='submit' name='upload' value='Changer la photo de profil'>
-    </form>";
-            echo "<a href='deconect.php'>Déconnexion</a>";
+    echo "<h1  class='text-center'>🕷️ Bonjour et bienvenue {$utilisateur['prenom']} 🕷️</h1><br> 
+    <div class='row mt-4'>
+                      <div class='col-md-4 text-center'>
+                          <img src='photo/{$utilisateur['photo']}' alt='Photo de profil' class='img-fluid rounded-circle'>
+                      </div>
+                      <div class='col-md-6'>
+                          <ul class='list-group'>
+                              <li class='list-group-item'><strong>Login :</strong> {$utilisateur['login']}</li>
+                              <li class='list-group-item'><strong>Prénom :</strong> {$utilisateur['prenom']}</li>
+                          </ul>
+                          <form action='profil.php' method='post' enctype='multipart/form-data' class='mt-3'>
+                              <div class='mb-3'>
+                                  <input type='file' name='photo' class='form-control' required>
+                              </div>
+                              <button type='submit' name='upload' class='btn btn-success'>Valider</button>
+                          </form>
+                      </div>
+                      <a href='deconect.php' class='btn btn-danger mt-3 col-md-2'>Déconnexion</a>
+                  </div>";
 }
 
 //modification de la pdp fait avec ce tuto : https://www.youtube.com/watch?v=lDZLZAdr1is
@@ -139,6 +123,10 @@ if ($utilisateur) {
     }
 
 ?>
+</div>
+<div class="container mt-50">
+    <div class="mb-3 mt-30"></div>
+</div>
     
     <?php
 // affichage du footer

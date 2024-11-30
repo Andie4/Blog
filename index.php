@@ -28,34 +28,9 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg ">
-  <div class="container-fluid">
-    <p class="">🎮</p>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_login.php">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="saisie_inscription.php">Inscription</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="archive.php">Archive</a>
-        </li>
+  
+<?php include("nav.php"); ?>
 
-        <li class="nav-item">
-          <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
 <!-- image de fond accueil -->
 <img src="photo/accueil.jpg" alt="" class="imgfond">
@@ -88,11 +63,12 @@ $utilisateur=$auteurStmt->fetch(PDO::FETCH_ASSOC);
               <img src='photo/{$billet['photo']}' class='imgb'>
 						</div>
 					
-				</div>";
+				</div>
+        </div>
+        ";
     }
 
 ?>
-
 
 <?php
 // affichage du footer

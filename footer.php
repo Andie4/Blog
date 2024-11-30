@@ -14,47 +14,47 @@
     <footer class=" text-center">
     <!-- Grid container -->
     <div class="container">
-      <!-- Section: Links -->
+    
       <section class="mt-0.5">
         <!-- Grid row-->
         <div class="row text-center d-flex justify-content-center pt-5">
           <!-- Grid column -->
           <div class="col-md-2">
-            <h6 class="text-uppercase font-weight-bold">
+            <p class="text-uppercase font-weight-bold">
              <a class="nav-link" aria-current="page" href="index.php">Accueil</a>
-        </h6>
+        </p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-2">
-            <h6 class="text-uppercase font-weight-bold">
+            <p class="text-uppercase font-weight-bold">
                 <a class="nav-link" href="saisie_login.php">Connexion</a>
-            </h6>
+          </p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-2">
-            <h6 class="text-uppercase font-weight-bold">
+            <p class="text-uppercase font-weight-bold">
                 <a class="nav-link" href="saisie_inscription.php">Inscription</a>
-            </h6>
+          </p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-2">
-            <h6 class="text-uppercase font-weight-bold">
+            <p class="text-uppercase font-weight-bold">
                 <a class="nav-link" href="archive.php">Archive</a>
-            </h6>
+          </p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-2">
-            <h6 class="text-uppercase font-weight-bold">
+            <p class="text-uppercase font-weight-bold">
                 <a class="nav-link" aria-disabled="true" href="profil.php">Profil</a>
-            </h6>
+          </p>
           </div>
           <!-- Grid column -->
           
@@ -69,7 +69,7 @@
       <section class="mb-0.5">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8">
-            <h6 class="text-uppercase font-weight-bold"><a href="mentions.php" class="nav-link">Mentions légales</a></h6>
+            <p class="text-uppercase font-weight-bold"><a href="mentions.php" class="nav-link">Mentions légales</a></p>
           </div>
         </div>
       </section>
